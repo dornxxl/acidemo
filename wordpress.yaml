@@ -1,0 +1,60 @@
+apiVersion: '2021-10-01'
+location: eastasia
+name: aciwpdemo
+properties:
+  containers:
+  - name: wordpress
+    properties:
+      image: bitnami/wordpress
+      environmentVariables:
+      - name: WORDPRESS_DATABASE_HOST
+        value: db_fqdn
+      - name: WORDPRESS_DATABASE_USER
+        secureValue: db_user 
+      - name: WORDPRESS_DATABASE_PASSWORD
+        secureValue: db_password
+      - name: WORDPRESS_DATABASE_NAME
+        value: db_name
+      - name: WORDPRESS_USERNAME
+        secureValue: wp_user
+      - name: WORDPRESS_PASSWORD
+        secureValue: wp_password
+      - name: WORDPRESS_BLOG_NAME
+        value: WordpressBLOG
+      - name: WORDPRESS_FIRST_NAME
+        secureValue: wp_user_firstname
+      - name: WORDPRESS_LAST_NAME
+        secureValue: wp_user_lastname
+      - name: WORDPRESS_ENABLE_HTTPS
+        value: true
+      ports:
+      - port: 8080
+        protocol: TCP
+      - port: 8443
+        protocol: TCP
+      resources:
+        requests:
+          cpu: 2.0
+          memoryInGB: 2.0
+      volumeMounts:
+      - mountPath: /bitnami/wordpress
+        name: wwwvolume
+      - mountPath: /certs
+        name: certvolume
+  restartPolicy: Always
+  osType: Linux
+  subnetIds:
+    - id: <subnet-id>
+  volumes:
+  - name: wwwvolume
+    azureFile:
+      sharename: wwwsharename
+      storageAccountName: storage_account_name
+      storageAccountKey: storage_access_key
+  - name: certvolume
+    azureFile:
+      sharename: certsharename
+      storageAccountName: storage_account_name
+      storageAccountKey: storage_access_key
+tags: {}
+type: Microsoft.ContainerInstance/containerGroups
