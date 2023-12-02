@@ -83,7 +83,7 @@ Container Image [bitnami/wordpress](https://hub.docker.com/r/bitnami/wordpress) 
    az storage file upload --account-name $storageacct --account-key $storageacctkey --share-name cert --source server_com.ca-bundle --path server-ca.crt
    ```
 
-2. สร้าง Container Instant ทีละตัว โดยรอให้ตัวแรกทำการ ติดตั้ง Wordpress Script และ Initial Database เรียบร้อยก่อนแล้วจึงรันตัวที่เหลือตาม โดยการรันครั้งนี้จะใช้ YAML ไฟล์ โดยใช้ Template จากไฟล์ [wordpress.yaml](./wordpress.yaml) โดยแก้ไขค่าที่อยู่ใน ```<$xxxx>``` ให้ตรงกับที่เราสร้างไว้ก่อนหน้า (หากทำตามขั้นตอนสามารถเช็คได้โดย echo ตัวแปลนั้นๆ เช่น ```<$location>``` ก็ให้ใส่ค่าที่ได้จากการ ```echo $location``` เป็นต้น) 
+2. สร้าง Container Instant ทีละตัว โดยรอให้ตัวแรกทำการ ติดตั้ง Wordpress Script และ Initial Database เรียบร้อยก่อนแล้วจึงรันตัวที่เหลือตาม โดยการรันครั้งนี้จะใช้ YAML ไฟล์ โดยใช้ Template จากไฟล์ [wordpress.yaml](./wordpress.yaml) โดยแก้ไขค่าที่อยู่ใน ```<$xxxx>``` ให้ตรงกับที่เราสร้างไว้ก่อนหน้า (หากทำตามขั้นตอนสามารถเช็คได้โดย echo ตัวแปลนั้นๆ เช่น ```<$location>``` ก็ให้ใส่ค่าที่ได้จากการ ```echo $location``` เป็นต้น)
 
    ```yaml
    apiVersion: '2021-10-01'
